@@ -1,7 +1,7 @@
 {
-  "name": "react",
+  "name": "example-harmony",
   "version": "1.0.0",
-  "description": "React example starter project",
+  "description": "Magic harmony example",
   "keywords": [
     "react",
     "starter"
@@ -11,7 +11,7 @@
     "@harmony-js/core": "^0.1.36",
     "@harmony-js/utils": "0.1.55",
     "@magic-ext/harmony": "^0.1.0",
-    "magic-sdk": "^2.7.0",
+    "magic-sdk": "2.4.7",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-scripts": "3.4.3",
