@@ -6,7 +6,7 @@ import { HarmonyExtension } from '@magic-ext/harmony';
 const { Harmony: Index } = require('@harmony-js/core');
 const { ChainID, ChainType, Units, toWei } = require('@harmony-js/utils');
 
-const magic = new Magic('pk_test_D62213CFB5FED5E4', {
+const magic = new Magic('pk_live_CB35102149E24D4D', {
   extensions: [
     new HarmonyExtension({
       rpcUrl: 'https://api.s0.b.hmny.io',
