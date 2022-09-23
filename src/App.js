@@ -1,64 +1,64 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 import { Magic } from "magic-sdk";
-import { HarmonyExtension } from '@magic-ext/harmony';
+import { HarmonyExtension } from "@magic-ext/harmony";
 
-const { Harmony: Index } = require('@harmony-js/core');
-const { ChainID, ChainType, Units, toWei } = require('@harmony-js/utils');
+const { Harmony: Index } = require("@harmony-js/core");
+const { ChainID, ChainType, Units, toWei } = require("@harmony-js/utils");
 
-const magic = new Magic('pk_live_CB35102149E24D4D', {
+const magic = new Magic("pk_live_8FC95B6C5E31EAFA", {
   extensions: [
     new HarmonyExtension({
-      rpcUrl: 'https://api.s0.b.hmny.io',
-      chainId: ChainID.HmyTestnet
-    })
-  ]
+      rpcUrl: "https://api.s0.b.hmny.io",
+      chainId: ChainID.HmyTestnet,
+    }),
+  ],
 });
 
 const harmony = new Index(
-    // rpc url
-    'https://api.s0.b.hmny.io',
-    {
-      // chainType set to Index
-      chainType: ChainType.Harmony,
-      // chainType set to HmyLocal
-      chainId: ChainID.HmyTestnet,
-    },
+  // rpc url
+  "https://api.s0.b.hmny.io",
+  {
+    // chainType set to Index
+    chainType: ChainType.Harmony,
+    // chainType set to HmyLocal
+    chainId: ChainID.HmyTestnet,
+  }
 );
 
 let contractAddress = "0x67a3f8db0c98524e8e4513f95cd68f7fbbca7f06";
 
 const contractAbi = [
   {
-    "constant": false,
-    "inputs": [
+    constant: false,
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "num",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "num",
+        type: "uint256",
+      },
     ],
-    "name": "store",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "store",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "retreive",
-    "outputs": [
+    constant: true,
+    inputs: [],
+    name: "retreive",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  }
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
 ];
 
 export default function App() {
@@ -76,7 +76,7 @@ export default function App() {
   const [deployingContract, setDeployingContract] = useState(false);
 
   useEffect(() => {
-    magic.user.isLoggedIn().then(async magicIsLoggedIn => {
+    magic.user.isLoggedIn().then(async (magicIsLoggedIn) => {
       setIsLoggedIn(magicIsLoggedIn);
       if (magicIsLoggedIn) {
         const { publicAddress } = await magic.user.getMetadata();
@@ -97,21 +97,20 @@ export default function App() {
   };
 
   const handlerSendTransaction = async () => {
-
     const params = {
       //  token send to
       to: destinationAddress,
       // amount to send
       value: toWei(sendAmount, Units.one).toString(),
       // gas limit, you can use string
-      gasLimit: '210000',
+      gasLimit: "210000",
       // send token from shardID
       shardID: 0,
       // send token to toShardID
       toShardID: 0,
       // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
       gasPrice: 1000000000,
-    }
+    };
 
     setSendingTransaction(true);
 
@@ -121,28 +120,27 @@ export default function App() {
 
     setTxHash(tx.transactionHash);
 
-    console.log('send transaction', tx)
+    console.log("send transaction", tx);
   };
 
   const handleDeployContract = async () => {
-
-    const bin = '608060405234801561001057600080fd5b5060c68061001f6000396000f3fe6080604052348015600f576000' +
-        '80fd5b506004361060325760003560e01c80636057361d146037578063b05784b8146062575b600080fd5b6060600480' +
-        '36036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b60686088565b60405180' +
-        '82815260200191505060405180910390f35b8060008190555050565b6000805490509056fea265627a7a723158209e86' +
-        '9bf97eba094ccf7533f0f92b4de32cf3cce7d7cff974769bca975e178b0164736f6c63430005110032';
-
+    const bin =
+      "608060405234801561001057600080fd5b5060c68061001f6000396000f3fe6080604052348015600f576000" +
+      "80fd5b506004361060325760003560e01c80636057361d146037578063b05784b8146062575b600080fd5b6060600480" +
+      "36036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b60686088565b60405180" +
+      "82815260200191505060405180910390f35b8060008190555050565b6000805490509056fea265627a7a723158209e86" +
+      "9bf97eba094ccf7533f0f92b4de32cf3cce7d7cff974769bca975e178b0164736f6c63430005110032";
 
     const contractBytecode = {
       data: `0x${bin}`,
-      gasLimit: '210000',
+      gasLimit: "210000",
       // send token from shardID
       shardID: 0,
       // send token to toShardID
       toShardID: 0,
       // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
       gasPrice: 1000000000,
-      arguments: []
+      arguments: [],
     };
     setDeployingContract(true);
 
@@ -152,14 +150,13 @@ export default function App() {
 
     setContractTxHash(tx.transactionHash);
 
-    console.log('deploy contract', tx);
+    console.log("deploy contract", tx);
   };
 
   const handleContractSend = async () => {
-
     const deployedContract = harmony.contracts.createContract(
-        contractAbi,
-        contractAddress
+      contractAbi,
+      contractAddress
     );
 
     const tx = await deployedContract.methods.store(900);
@@ -167,8 +164,8 @@ export default function App() {
     let { txPayload } = tx.transaction;
 
     txPayload.from = publicAddress;
-    txPayload.gasLimit = '210000';
-    txPayload.gasPrice = '1000000000';
+    txPayload.gasLimit = "210000";
+    txPayload.gasPrice = "1000000000";
 
     setContractSending(true);
 
@@ -177,8 +174,7 @@ export default function App() {
     setContractSending(false);
 
     setContractSendHash(txn.transactionHash);
-    console.log('call contract', txn)
-
+    console.log("call contract", txn);
   };
 
   return (
@@ -191,7 +187,7 @@ export default function App() {
             name="email"
             required="required"
             placeholder="Enter your email"
-            onChange={event => {
+            onChange={(event) => {
               setEmail(event.target.value);
             }}
           />
@@ -228,9 +224,9 @@ export default function App() {
                   </a>
                 </div>
               </div>
-            ) : sendingTransaction ? (<div className="sending-status">
-              Sending transaction
-            </div>) : (
+            ) : sendingTransaction ? (
+              <div className="sending-status">Sending transaction</div>
+            ) : (
               <div />
             )}
             <input
@@ -239,7 +235,7 @@ export default function App() {
               className="full-width"
               required="required"
               placeholder="Destination address"
-              onChange={event => {
+              onChange={(event) => {
                 setDestinationAddress(event.target.value);
               }}
             />
@@ -249,7 +245,7 @@ export default function App() {
               className="full-width"
               required="required"
               placeholder="Amount in One"
-              onChange={event => {
+              onChange={(event) => {
                 setSendAmount(event.target.value);
               }}
             />
@@ -259,11 +255,11 @@ export default function App() {
           </div>
           <div className="container">
             <h1>Smart Contract</h1>
-            {
-              deployingContract ? <div className="sending-status">
-                Deploying contract
-              </div> : ''
-            }
+            {deployingContract ? (
+              <div className="sending-status">Deploying contract</div>
+            ) : (
+              ""
+            )}
             <div className="info">
               <a
                 href={`https://explorer.pops.one/#/tx/${contractTxHash}`}
@@ -278,15 +274,15 @@ export default function App() {
           </div>
           <div className="container">
             <h1>Contract Send</h1>
-            {
-              contractSending ? <div className="sending-status">
-                Calling contract send
-              </div> : ''
-            }
+            {contractSending ? (
+              <div className="sending-status">Calling contract send</div>
+            ) : (
+              ""
+            )}
             <div className="info">
               <a
-                  href={`https://explorer.pops.one/#/tx/${contractSendHash}`}
-                  target="_blank"
+                href={`https://explorer.pops.one/#/tx/${contractSendHash}`}
+                target="_blank"
               >
                 {contractSendHash}
               </a>
@@ -296,7 +292,6 @@ export default function App() {
             </button>
           </div>
         </div>
-
       )}
     </div>
   );
