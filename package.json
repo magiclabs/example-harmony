@@ -10,8 +10,8 @@
   "dependencies": {
     "@harmony-js/core": "^0.1.36",
     "@harmony-js/utils": "0.1.55",
-    "@magic-ext/harmony": "^0.1.0",
-    "magic-sdk": "2.4.7",
+    "@magic-ext/harmony": "^14.0.0",
+    "magic-sdk": "^19.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-scripts": "3.4.3",
@@ -21,7 +21,7 @@
     "typescript": "3.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3010 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

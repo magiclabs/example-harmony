@@ -103,13 +103,13 @@ export default function App() {
       // amount to send
       value: toWei(sendAmount, Units.one).toString(),
       // gas limit, you can use string
-      gasLimit: "210000",
+      gasLimit: 21000,
       // send token from shardID
       shardID: 0,
       // send token to toShardID
       toShardID: 0,
       // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-      gasPrice: 1000000000,
+      gasPrice: 100000000000,
     };
 
     setSendingTransaction(true);
@@ -203,7 +203,7 @@ export default function App() {
             <h1>Harmony address</h1>
             <div className="info">
               <a
-                href={`https://explorer.pops.one/#/address/${publicAddress}`}
+                href={`https://explorer.testnet.harmony.one/address/${publicAddress}`}
                 target="_blank"
               >
                 {publicAddress}
@@ -217,7 +217,7 @@ export default function App() {
                 <div>Send transaction success</div>
                 <div className="info">
                   <a
-                    href={`https://explorer.pops.one/#/tx/${txHash}`}
+                    href={`https://explorer.testnet.harmony.one/tx/${txHash}`}
                     target="_blank"
                   >
                     {txHash}
@@ -262,7 +262,7 @@ export default function App() {
             )}
             <div className="info">
               <a
-                href={`https://explorer.pops.one/#/tx/${contractTxHash}`}
+                href={`https://explorer.testnet.harmony.one/tx/${contractTxHash}`}
                 target="_blank"
               >
                 {contractTxHash}
@@ -281,7 +281,7 @@ export default function App() {
             )}
             <div className="info">
               <a
-                href={`https://explorer.pops.one/#/tx/${contractSendHash}`}
+                href={`https://explorer.testnet.harmony.one/tx/${contractSendHash}`}
                 target="_blank"
               >
                 {contractSendHash}
