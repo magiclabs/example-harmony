@@ -6,7 +6,7 @@ import { HarmonyExtension } from "@magic-ext/harmony";
 const { Harmony: Index } = require("@harmony-js/core");
 const { ChainID, ChainType, Units, toWei } = require("@harmony-js/utils");
 
-const magic = new Magic("pk_live_8D40A7E251F283ED", {
+const magic = new Magic("pk_live_8FC95B6C5E31EAFA", {
   extensions: [
     new HarmonyExtension({
       rpcUrl: "https://api.s0.b.hmny.io",
@@ -133,13 +133,13 @@ export default function App() {
 
     const contractBytecode = {
       data: `0x${bin}`,
-      gasLimit: "210000",
+      gasLimit: 210000,
       // send token from shardID
       shardID: 0,
       // send token to toShardID
       toShardID: 0,
       // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-      gasPrice: 1000000000,
+      gasPrice: 100000000000,
       arguments: [],
     };
     setDeployingContract(true);
@@ -165,7 +165,7 @@ export default function App() {
 
     txPayload.from = publicAddress;
     txPayload.gasLimit = "210000";
-    txPayload.gasPrice = "1000000000";
+    txPayload.gasPrice = "100000000000";
 
     setContractSending(true);
 
@@ -209,6 +209,11 @@ export default function App() {
                 {publicAddress}
               </a>
             </div>
+            <button>
+              <a href="https://faucet.pops.one/" target="_blank">
+                Faucet
+              </a>
+            </button>
           </div>
           <div className="container">
             <h1>Send Transaction</h1>
